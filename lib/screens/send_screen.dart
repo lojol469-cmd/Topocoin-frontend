@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/wallet_provider.dart';
+import '../providers/auth_provider.dart';
 
 class SendScreen extends StatefulWidget {
   const SendScreen({super.key});
@@ -62,6 +63,8 @@ class _SendScreenState extends State<SendScreen> {
   }
 
   Future<void> _send() async {
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+    final from = authProvider.publicKey ?? '';
     final amount = double.tryParse(_amountController.text);
     if (amount == null || amount <= 0) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -72,9 +75,8 @@ class _SendScreenState extends State<SendScreen> {
 
     setState(() => _isLoading = true);
     try {
-      // For demo, just update local state
       await Provider.of<WalletProvider>(context, listen: false).sendTransaction(
-        '', // from
+        from,
         _toController.text,
         amount,
       );

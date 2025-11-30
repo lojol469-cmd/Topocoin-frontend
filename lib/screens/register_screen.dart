@@ -34,10 +34,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(
-                  Icons.account_balance_wallet,
-                  size: 100,
-                  color: Color(0xFF00D4FF),
+                Image.asset(
+                  'assets/external_logo.png',
+                  height: 120,
+                  width: 120,
+                  fit: BoxFit.contain,
                 ),
                 const SizedBox(height: 20),
                 Text(
